@@ -46,3 +46,18 @@ def test_search_books_by_author():
     data = response.json()
     assert len(data) == 1
     assert data[0]["title"] == "Война и мир"
+def test_search_books_by_partial_author():
+    response = client.get("/books/search/Толст")
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["author"] == "Лев Толстой"
+
+
+def test_search_books_by_unknown_author():
+    response = client.get("/books/search/НеизвестныйАвтор")
+
+    assert response.status_code == 200
+    assert response.json() == []
