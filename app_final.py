@@ -137,5 +137,9 @@ def search_books(author: str):
         if author.casefold() in book.author.casefold()
     ]
 
-    logger.info("Поиск произведений по автору: %s", author)
-    return results
+logger.info(
+    "Поиск произведений по автору '%s': найдено %s",
+    author,
+    len(results),
+)
+return results
