@@ -1,4 +1,3 @@
-
 import logging
 import os
 
@@ -128,7 +127,6 @@ def get_book(book_id: int):
         detail="Произведение не найдено",
     )
 
-
 @app.get("/books/search/{author}")
 def search_books(author: str):
     results = [
@@ -137,9 +135,10 @@ def search_books(author: str):
         if author.casefold() in book.author.casefold()
     ]
 
-logger.info(
-    "Поиск произведений по автору '%s': найдено %s",
-    author,
-    len(results),
-)
-return results
+    logger.info(
+        "Поиск произведений по автору '%s': найдено %s",
+        author,
+        len(results),
+    )
+    return results
+
