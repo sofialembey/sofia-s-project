@@ -121,7 +121,8 @@ def get_book(book_id: int):
         if book.id == book_id:
             logger.info("Запрошено произведение с ID %s", book_id)
             return book
-
+            
+    logger.warning("Произведение с ID %s не найдено", book_id)
     raise HTTPException(
         status_code=404,
         detail="Произведение не найдено",
