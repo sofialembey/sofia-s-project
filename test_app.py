@@ -61,3 +61,22 @@ def test_search_books_by_unknown_author():
 
     assert response.status_code == 200
     assert response.json() == []
+
+def test_version_returns_app_and_version():
+    response = client.get("/version")
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data["app"] == "Каталог русской классики"
+    assert data["version"] == "1.0.0"
+
+
+def test_root_returns_welcome_message():
+    response = client.get("/")
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert "message" in data
+    assert data["docs"] == "/docs"
