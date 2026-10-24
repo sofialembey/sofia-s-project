@@ -1,4 +1,4 @@
-
+import os
 from fastapi.testclient import TestClient
 
 from app_final import app
@@ -68,9 +68,13 @@ def test_version_returns_app_and_version():
     assert response.status_code == 200
 
     data = response.json()
-    assert data["app"] == "Каталог русской классики"
-    assert data["version"] == "1.0.0"
+    expected_name = os.getenv(
+        "APP_NAME",
+        "Каталог русской классики",
+    )
 
+    assert data["app"] == expected_name
+    assert data["version"] == "1.0.0"
 
 def test_root_returns_welcome_message():
     response = client.get("/")
